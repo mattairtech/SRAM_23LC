@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map SRAM_23LC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SRAM_23LC	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin			KEYWORD2
+end			KEYWORD2
+readByte		KEYWORD2
+writeByte		KEYWORD2
+readBlock		KEYWORD2
+writeBlock		KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
