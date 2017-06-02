@@ -41,9 +41,13 @@ SRAM_23LC SRAM(&SPI_PERIPHERAL, CHIP_SELECT_PIN, SRAM_23LCV1024);
 // Additional SRAM chips
 // SRAM_23LC SRAM1(&SPI_PERIPHERAL1, CHIP_SELECT_PIN1, SRAM_23LC512);
 
-#define BUFFER_SIZE	26
-#define START_ADDRESS	100
-uint8_t buffer[BUFFER_SIZE];
+#define START_ADDRESS   250
+
+//uint8_t buffer[BUFFER_SIZE];
+//#define BUFFER_SIZE  320
+
+char buffer[] = "The MattairTech MT-D21E is a development board for the 32-pin Microchip / Atmel SAMx21E ARM Cortex M0+ microcontrollers. Choose between the D21E (general purpose M0+ MCU, USB, I2S, also used in the Arduino Zero), L21E (low power features, enhanced analog, USB, crypto/TRNG, custom logic), or C21E (5V support, MPU, 2x CAN instead of USB, Sigma-Delta and 2x SAR ADCs). Arduino 1.6.x compatible core files (1.6.x, 1.8.x IDE) for all 3 chips is provided.";
+#define BUFFER_SIZE  (sizeof(buffer) / sizeof(uint8_t))
 
 void setup(void)
 {
@@ -52,7 +56,7 @@ void setup(void)
    * Note that SPI transaction support is required.
    */
   SRAM.begin();
-  //SRAM.begin(8000000UL);	// or specify speed
+  //SRAM.begin(8000000UL);      // or specify speed
 
   Serial.begin(9600);
 }
@@ -64,29 +68,45 @@ void loop(void)
   // Store BUFFER_SIZE ASCII characters starting with 'a'
   Serial.print("Write Block: ");
   for (size_t i=0; i < BUFFER_SIZE; i++) {
-    buffer[i] = ('a' + i);
     Serial.write(buffer[i]);
-    Serial.print(' ');
   }
   Serial.println();
 
   // Write block
   if (!SRAM.writeBlock(START_ADDRESS, BUFFER_SIZE, buffer)) {
-    Serial.println("Write Failure");
+    Serial.println("Write Block Failure");
   }
+
+  // Clear buffer
+  memset(&buffer[0], 0, BUFFER_SIZE);
+
+  // Read Byte
+  Serial.print("Read Byte:  ");
+  for (size_t i=0; i < BUFFER_SIZE; i++) {
+    buffer[i] = SRAM.readByte(START_ADDRESS + i);
+    Serial.write(buffer[i]);
+  }
+  Serial.println();
+
+  // Write Byte
+  Serial.print("Write Byte:  ");
+  for (size_t i=0; i < BUFFER_SIZE; i++) {
+    Serial.write(buffer[i]);
+    SRAM.writeByte(START_ADDRESS + i, buffer[i]);
+  }
+  Serial.println();
 
   // Clear buffer
   memset(&buffer[0], 0, BUFFER_SIZE);
 
   // Read block
   if (!SRAM.readBlock(START_ADDRESS, BUFFER_SIZE, buffer)) {
-    Serial.println("Read Failure");
+    Serial.println("Read Block Failure");
   }
 
   Serial.print("Read Block:  ");
   for (size_t i=0; i < BUFFER_SIZE; i++) {
     Serial.write(buffer[i]);
-    Serial.print(' ');
   }
   Serial.println();
 

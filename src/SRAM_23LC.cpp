@@ -147,10 +147,10 @@ void SRAM_23LC::startCommand(const uint8_t command, const uint32_t address)
 void SRAM_23LC::sendAddressBytes(const uint32_t address)
 {
   if (_capacity > 0x10000) {
-    _spi->transfer(address & 0x00FF0000);
+    _spi->transfer((uint8_t)((address >> 16) & 0xFF));
   }
-  _spi->transfer(address & 0x0000FF00);
-  _spi->transfer(address & 0x000000FF);
+  _spi->transfer((uint8_t)((address >> 8) & 0xFF));
+  _spi->transfer((uint8_t)(address & 0xFF));
 }
 
 void SRAM_23LC::endCommand(void)

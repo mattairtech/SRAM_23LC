@@ -97,6 +97,11 @@ size_t ret = SRAM.writeBlock(START_ADDRESS, BUFFER_SIZE, buffer);
 * Page mode or Byte mode?
 * Use Stream class? It probably doesn't make sense with a storage device (with addresses).
 
+# Changelog
+
+v1.1.0 - Fixed inability to set addresses higher than 8-bits. Updated example sketchfor better testing.
+v1.0.0 - Initial release.
+
 # License
 
 Copyright (c) 2017, Justin Mattair (justin@mattair.net)
