@@ -46,7 +46,7 @@ SRAM_23LC SRAM(&SPI_PERIPHERAL, CHIP_SELECT_PIN, SRAM_23LCV1024);
 //uint8_t buffer[BUFFER_SIZE];
 //#define BUFFER_SIZE  320
 
-char buffer[] = "The MattairTech MT-D21E is a development board for the 32-pin Microchip / Atmel SAMx21E ARM Cortex M0+ microcontrollers. Choose between the D21E (general purpose M0+ MCU, USB, I2S, also used in the Arduino Zero), L21E (low power features, enhanced analog, USB, crypto/TRNG, custom logic), or C21E (5V support, MPU, 2x CAN instead of USB, Sigma-Delta and 2x SAR ADCs). Arduino 1.6.x compatible core files (1.6.x, 1.8.x IDE) for all 3 chips is provided.";
+char buffer[] = "The MattairTech MT-D21E is a development board for the 32-pin Microchip / Atmel SAMx21E ARM Cortex M0+ microcontrollers. Choose between the D21E, L21E, or C21E. Arduino compatible core files for all 3 chips is provided.";
 #define BUFFER_SIZE  (sizeof(buffer) / sizeof(uint8_t))
 
 void setup(void)
@@ -65,7 +65,7 @@ void loop(void)
 {
   while (!Serial); // Wait for serial monitor to connect
 
-  // Store BUFFER_SIZE ASCII characters starting with 'a'
+  // Print buffer to serial monitor
   Serial.print("Write Block: ");
   for (size_t i=0; i < BUFFER_SIZE; i++) {
     Serial.write(buffer[i]);
@@ -80,7 +80,7 @@ void loop(void)
   // Clear buffer
   memset(&buffer[0], 0, BUFFER_SIZE);
 
-  // Read Byte
+  // Read Byte, print to serial monitor
   Serial.print("Read Byte:  ");
   for (size_t i=0; i < BUFFER_SIZE; i++) {
     buffer[i] = SRAM.readByte(START_ADDRESS + i);
@@ -88,7 +88,7 @@ void loop(void)
   }
   Serial.println();
 
-  // Write Byte
+  // Write Byte, print to serial monitor
   Serial.print("Write Byte:  ");
   for (size_t i=0; i < BUFFER_SIZE; i++) {
     Serial.write(buffer[i]);
@@ -100,11 +100,12 @@ void loop(void)
   memset(&buffer[0], 0, BUFFER_SIZE);
 
   // Read block
+  Serial.print("Read Block:  ");
   if (!SRAM.readBlock(START_ADDRESS, BUFFER_SIZE, buffer)) {
     Serial.println("Read Block Failure");
   }
 
-  Serial.print("Read Block:  ");
+  // Print buffer to serial monitor
   for (size_t i=0; i < BUFFER_SIZE; i++) {
     Serial.write(buffer[i]);
   }

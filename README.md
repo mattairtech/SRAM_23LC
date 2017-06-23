@@ -4,7 +4,7 @@ Driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for
 AVR, SAM3X (Due), and SAM M0+ (SAMD, SAML, SAMC) microcontrollers on
 the Arduino platform.
 
-# Supported Chips
+## Supported Chips
 
 * 128KB
   * 23LCV1024
@@ -17,7 +17,7 @@ the Arduino platform.
 * 8KB
   * 23A640, 23K640
 
-# Startup
+## Startup
 
 Call the constructor with the SPI bus, chip select, and device. Devices are defined
 in SRAM_23LC.h and have names like SRAM_23LCV1024. More than one device can be instantiated.
@@ -41,11 +41,12 @@ Call end() to set the chip select pin back to INPUT.
 SRAM.end();
 ```
 
-# Byte Transfers
+## Byte Transfers
 
 Chips with 1024Kbits use 24-bit addresses. Chips with 512Kbits or less use 16-bit addresses.
 
 Call readByte with the address to read one byte. Returns 0 if address >= capacity.
+Because valid data could also be 0, use readBlock() to catch this error.
 
 ```
 uint32_t address = 0x000A;
@@ -61,7 +62,7 @@ uint8_t byte = 0x1F;
 size_t ret = SRAM.writeByte(address, byte);
 ```
 
-# Block Transfers
+## Block Transfers
 
 Chips with 1024Kbits use 24-bit addresses. Chips with 512Kbits or less use 16-bit addresses.
 
@@ -89,7 +90,7 @@ past the end of the buffer. Returns 0 if address >= capacity or length = 0.
 size_t ret = SRAM.writeBlock(START_ADDRESS, BUFFER_SIZE, buffer);
 ```
 
-# Possible Future Additions/Changes
+## Possible Future Additions/Changes
 
 * Optimizations
 * DMA support
@@ -97,12 +98,13 @@ size_t ret = SRAM.writeBlock(START_ADDRESS, BUFFER_SIZE, buffer);
 * Page mode or Byte mode?
 * Use Stream class? It probably doesn't make sense with a storage device (with addresses).
 
-# Changelog
+## Changelog
 
+v1.1.1 - Fixed compilation error on avr architecture.
 v1.1.0 - Fixed inability to set addresses higher than 8-bits. Updated example sketchfor better testing.
 v1.0.0 - Initial release.
 
-# License
+## License
 
 Copyright (c) 2017, Justin Mattair (justin@mattair.net)
 

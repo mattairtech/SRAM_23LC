@@ -27,7 +27,6 @@
 #define SRAM_23LC_h_
 
 #include "Arduino.h"
-#include "wiring_digital.h"
 #include <SPI.h>
 
 #if (!defined(SPI_HAS_TRANSACTION) || SPI_HAS_TRANSACTION == 0)
