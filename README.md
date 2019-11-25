@@ -1,8 +1,7 @@
 # SRAM_23LC
 
-Driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for
-AVR, SAM3X (Due), and SAM M0+ (SAMD, SAML, SAMC) microcontrollers on
-the Arduino platform.
+This is a driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for any architecture on the
+Arduino platform, including AVR, SAM3X (Due), SAM M0+ (SAMD, SAML, SAMC), and STM32 microcontrollers.
 
 ## Supported Chips
 
@@ -100,13 +99,14 @@ size_t ret = SRAM.writeBlock(START_ADDRESS, BUFFER_SIZE, buffer);
 
 ## Changelog
 
+v1.1.2 - Fixed bad datatype on avr architecture (thanks @mataide). Changed architectures supported to match all (thanks @matthijskooijman). Fixed keywords.txt highlighting (thanks @per1234).
 v1.1.1 - Fixed compilation error on avr architecture.
 v1.1.0 - Fixed inability to set addresses higher than 8-bits. Updated example sketchfor better testing.
 v1.0.0 - Initial release.
 
 ## License
 
-Copyright (c) 2017, Justin Mattair (justin@mattair.net)
+Copyright (c) 2017-2019, Justin Mattair (justin@mattair.net)
 
 Permission to use, copy, modify, and distribute this software
 and its documentation for any purpose and without fee is hereby

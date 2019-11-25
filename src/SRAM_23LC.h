@@ -2,7 +2,7 @@
  * Driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for
  * AVR, SAM3X (Due), and SAM M0+ (SAMD, SAML, SAMC) microcontrollers
  * 
- * Copyright (c) 2017, Justin Mattair (justin@mattair.net)
+ * Copyright (c) 2017-2019, Justin Mattair (justin@mattair.net)
  * 
  * Permission to use, copy, modify, and distribute this software
  * and its documentation for any purpose and without fee is hereby
@@ -125,7 +125,7 @@ class SRAM_23LC
     SPIClass * _spi;
     SPISettings _spiSettings;
     SRAM_23LC_Device _device;
-    size_t _capacity;
+    uint32_t _capacity;
     uint8_t _chipSelect;
     uint32_t _clkSpeed;
 

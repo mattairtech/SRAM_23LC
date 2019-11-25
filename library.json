@@ -1,7 +1,7 @@
 {
   "name": "SRAM_23LC",
   "keywords": "SRAM, sram, 23LC, 23LCV, 23LCV1024, SPI, driver",
-  "description": "Driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for AVR, SAM3X (Due), and SAM M0+ (SAMD, SAML, SAMC) microcontrollers",
+  "description": "Driver for Microchip Technology Inc. 23LC (23LCV) SPI SRAM chips for Arduino (any architecture)",
   "authors":
   [
   {
